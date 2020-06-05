@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API documentation",
+    "description": "A CRUD style API in NodeJs using TypeScript"
+  },
+  "host": "localhost:9000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Api for users in the system"
+    },
+    {
+      "name": "Items",
+      "description": "Api for items in the system"
+    }
+  ],
+  "paths": {
+    "/users/getAllUsers": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/users/signUp": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add user to the DB",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User that want no signUp",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/users/logIn": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "LogIn user to the system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User that want no logIn",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/users/user/reset": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Reset user password",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User email that want no logIn",
+            "schema": {
+              "$ref": "#/definitions/email"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/email"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/items/getAllItems": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Get all items in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },"/items/addItem/:userId": {
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Add item to the DB",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Item we are adding",
+            "schema": {
+              "$ref": "#/definitions/itemAdd"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/itemAdd"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    }, "/items/updateItem/:itemId'": {
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Update item",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Item we are updating",
+            "schema": {
+              "$ref": "#/definitions/itemUpdate"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/itemUpdate"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    }, "/users/user/data/:userId/:page'": {
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Delete item",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Item id we want to delete",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "email": {
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "itemAdd": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupes": {
+          "type": "string"
+        }
+      }
+    },
+    "itemUpdate": {
+      "type": "object",
+      "properties": {
+        "newName": {
+          "type": "string"
+        },
+        "groupes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: ./docker/db/Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/data/db
+    volumes:
+      - ./data:/data/db
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/api/Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=dev
+      - DB_HOST=db
+    volumes:
+      - ./app/src:/home/node/app/src
+    ports:
+      - 9000:9000
+    links:
+      - db
+    depends_on:
+      - db
